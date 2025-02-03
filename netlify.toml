@@ -1,0 +1,21 @@
+[build]
+  publish = "."
+
+[forms]
+  [forms."contact"]
+    name = "Contact Form"
+
+[forms."contact".notifications]
+  [[forms."contact".notifications.email]]
+    from = "no-reply@netlify.com"
+    to = "anjanareji91@gmail.com"
+    subject = "New Contact Form Submission"
+    template = """
+Name: {{name}}
+Email: {{email}}
+Phone: {{phone}}
+Subject: {{subject}}
+
+Message:
+{{message}}
+    """ 
