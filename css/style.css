@@ -324,7 +324,6 @@ span {
     text-align: left;
     line-height: 1.2;
 }
-
 .about-content h3 {
     font-size: 2rem;
 }
@@ -332,6 +331,92 @@ span {
 .about-content p {
     font-size: 1.6rem;
     margin: 2rem 0 3rem;
+}
+
+.experience {
+    min-height: auto;
+    padding-bottom: 10rem;
+}
+
+.experience h2 {
+    margin-bottom: 5rem;
+}
+
+.experience-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.experience-box {
+    flex: 1 1 70rem;
+    background: var(--bg-color);
+    padding: 3rem 2rem 4rem;
+    border-radius: 2rem;
+    box-shadow: 0 .1rem .5rem var(--shadow-color);
+    border-left: .6rem solid var(--main-color);
+    transition: .5s ease;
+}
+
+.experience-box:hover {
+    box-shadow: 0 .1rem 2rem var(--shadow-color);
+    transform: scale(1.02);
+}
+
+.experience-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.experience-header h3 {
+    font-size: 2.6rem;
+    color: var(--main-color);
+    margin-bottom: 0.5rem;
+}
+
+.experience-header h4 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+}
+
+.experience-date {
+    font-size: 1.4rem;
+    color: var(--main-color);
+    font-weight: 600;
+    background: rgba(117, 78, 249, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: inline-block;
+}
+
+.experience-description p {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.experience-description ul {
+    list-style: none;
+    padding: 0;
+}
+
+.experience-description li {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    padding-left: 2rem;
+    position: relative;
+}
+
+.experience-description li::before {
+    content: '▸';
+    color: var(--main-color);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
 }
 
 .services {
