@@ -74,37 +74,147 @@ ScrollReveal({
     duration: 2000,
     delay: 200
 });
-
 ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
 ScrollReveal().reveal('.home-img img, .services-container, .portfolio-box, .testimonial-wrapper, .contact form', { origin: 'bottom' });
 ScrollReveal().reveal('.home-content h1, .about-img img', { origin: 'left' });
 ScrollReveal().reveal('.home-content h3, .home-content p, .about-content', { origin: 'right' });
 
 // Contact form handling
-const contactForm = document.querySelector('form[name="contact"]');
+const contactForm = document.querySelector('#contact-form');
 const successModal = document.getElementById('success-modal');
 const closeModalBtn = document.querySelector('.close-modal');
+const submitBtn = document.querySelector('.submit-btn');
 
 if (contactForm) {
+    // Add input validation and styling
+    const inputs = contactForm.querySelectorAll('input, textarea');
+
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.parentElement.classList.remove('focused');
+            }
+        });
+
+        input.addEventListener('input', () => {
+            validateField(input);
+        });
+    });
+
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Validate all fields
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            showNotification('Please fill in all required fields correctly.', 'error');
+            return;
+        }
+
+        // Show loading state
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<span>Sending...</span><i class="bx bx-loader-alt bx-spin"></i>';
+        submitBtn.disabled = true;
+
         try {
             const formData = new FormData(contactForm);
-            await fetch('/', {
+            
+            const response = await fetch('/', {
                 method: 'POST',
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(formData).toString()
             });
 
-            // Show success modal
-            successModal.classList.add('show');
-            contactForm.reset();
+            if (response.ok) {
+                // Show success modal
+                successModal.classList.add('show');
+                contactForm.reset();
+                inputs.forEach(input => {
+                    input.parentElement.classList.remove('focused');
+                });
+                showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+            } else {
+                throw new Error('Network response was not ok');
+            }
 
         } catch (error) {
             console.error('Error:', error);
-            alert('There was an error sending your message. Please try again.');
+            showNotification('There was an error sending your message. Please try again.', 'error');
+        } finally {
+            // Reset button state
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         }
+    });
+}
+
+// Field validation function
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = true;
+    
+    // Remove existing error classes
+    field.classList.remove('error');
+    
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+    } else if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            isValid = false;
+        }
+    } else if (field.type === 'tel' && value) {
+        const phoneRegex = /^[\+]?[\d\s\-\(\)]{10,}$/;
+        if (!phoneRegex.test(value)) {
+            isValid = false;
+        }
+    }
+    
+    if (!isValid) {
+        field.classList.add('error');
+    }
+    
+    return isValid;
+}
+
+// Notification function
+function showNotification(message, type = 'info') {
+    // Remove existing notifications
+    const existingNotification = document.querySelector('.notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class='bx ${type === 'success' ? 'bx-check-circle' : type === 'error' ? 'bx-error-circle' : 'bx-info-circle'}'></i>
+        <span>${message}</span>
+        <button class="notification-close">&times;</button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto-remove after 5 seconds
+    setTimeout(() => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 300);
+    }, 5000);
+    
+    // Manual close
+    notification.querySelector('.notification-close').addEventListener('click', () => {
+        notification.classList.add('fade-out');
+        setTimeout(() => notification.remove(), 300);
     });
 }
 
@@ -120,4 +230,40 @@ window.addEventListener('click', (e) => {
     if (e.target === successModal) {
         successModal.classList.remove('show');
     }
+});
+
+// Scroll to top functionality
+const scrollTopBtn = document.querySelector('.footer-iconTop');
+
+// Show/hide scroll to top button
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('show');
+    } else {
+        scrollTopBtn.classList.remove('show');
+    }
+});
+
+// Smooth scroll to top
+scrollTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Footer link smooth scrolling
+const footerLinks = document.querySelectorAll('.footer-section a[href^="#"]');
+footerLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });

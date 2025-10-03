@@ -99,7 +99,7 @@
     <!-- about section design -->
     <section class="about" id="about">
         <div class="about-img">
-            <img src="images/about.png" alt="">
+            <img src="images/about.jpg" alt="">
         </div>
 
         <div class="about-content">
@@ -278,32 +278,88 @@
     <!-- contact section design -->
     <section class="contact" id="contact">
         <h2 class="heading">Contact <span>Me!</span></h2>
+        <p class="contact-description">Let's collaborate and bring your content ideas to life! I'm here to help with all your writing needs.</p>
 
-        <form 
-            name="contact" 
-            method="POST" 
-            data-netlify="true" 
-            netlify-honeypot="bot-field"
-            action="/thank-you"
-            data-netlify-recaptcha="true"
-        >
-            <input type="hidden" name="form-name" value="contact" />
-            <input type="hidden" name="subject" value="New Contact Form Submission" />
-            <p class="hidden">
-                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-            </p>
-            <div class="input-box">
-                <input type="text" name="name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email Address" required>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class='bx bx-envelope'></i>
+                    <div>
+                        <h4>Email</h4>
+                        <span>anjanareji91@gmail.com</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class='bx bx-phone'></i>
+                    <div>
+                        <h4>Phone</h4>
+                        <span>+91 7510713733</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class='bx bx-map'></i>
+                    <div>
+                        <h4>Location</h4>
+                        <span>Kerala, India</span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i class='bx bx-time'></i>
+                    <div>
+                        <h4>Response Time</h4>
+                        <span>Within 24 hours</span>
+                    </div>
+                </div>
             </div>
-            <div class="input-box">
-                <input type="tel" name="phone" placeholder="Mobile Number">
-                <input type="text" name="subject" placeholder="Email Subject" required>
+
+            <div class="contact-form-wrapper">
+                <form 
+                    name="contact" 
+                    method="POST" 
+                    data-netlify="true" 
+                    netlify-honeypot="bot-field"
+                    class="contact-form"
+                    id="contact-form"
+                >
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p class="hidden">
+                        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+                    </p>
+                    
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input type="text" name="name" placeholder="Full Name" required>
+                            <i class='bx bx-user'></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="email" name="email" placeholder="Email Address" required>
+                            <i class='bx bx-envelope'></i>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <input type="tel" name="phone" placeholder="Mobile Number">
+                            <i class='bx bx-phone'></i>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" name="subject" placeholder="Email Subject" required>
+                            <i class='bx bx-message-dots'></i>
+                        </div>
+                    </div>
+                    
+                    <div class="input-wrapper full-width">
+                        <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+                        <i class='bx bx-message'></i>
+                    </div>
+                    
+                    <button type="submit" class="btn submit-btn">
+                        <span>Send Message</span>
+                        <i class='bx bx-send'></i>
+                    </button>
+                </form>
             </div>
-            <textarea name="message" cols="30" rows="10" placeholder="Your Message" required></textarea>
-            <div data-netlify-recaptcha="true"></div>
-            <button type="submit" class="btn">Send Message</button>
-        </form>
+        </div>
     </section>
 
     <!-- Success message modal -->
@@ -318,29 +374,31 @@
     <!-- footer design -->
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <div class="social-links">
-                    <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>
-                    <a href="#" title="Twitter"><i class='bx bxl-twitter'></i></a>
-                    <a href="#" title="Instagram"><i class='bx bxl-instagram-alt'></i></a>
-                    <a href="#" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-                </div>
+            <div class="footer-info">
+                <h3>Anjana Reji</h3>
+                <p>Content Writer & Creative Thinker</p>
+            </div>
+            
+            <div class="footer-social">
+                <a href="#" title="Facebook"><i class='bx bxl-facebook'></i></a>
+                <a href="#" title="Twitter"><i class='bx bxl-twitter'></i></a>
+                <a href="#" title="Instagram"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="#" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
             </div>
 
-            <div class="footer-section contact-icons">
-                <a href="mailto:anjanareji91@gmail.com" title="Email"><i class='bx bx-envelope'></i></a>
-                <a href="tel:+917510713733" title="Phone"><i class='bx bx-phone'></i></a>
-                <a href="#" title="Location"><i class='bx bx-map'></i></a>
-                <a href="Anjana_C_V.pdf" download title="Download CV"><i class='bx bx-download'></i></a>
+            <div class="footer-contact">
+                <a href="mailto:anjanareji91@gmail.com">anjanareji91@gmail.com</a>
+                <a href="tel:+917510713733">+91 7510713733</a>
             </div>
         </div>
 
         <div class="footer-bottom">
-            <p>Copyright &copy; 2025 | All Rights Reserved.</p>
-            <a href="#home" class="footer-iconTop" title="Back to Top">
-                <i class='bx bx-up-arrow-alt'></i>
-            </a>
+            <p>&copy; 2025 Anjana Reji. All Rights Reserved.</p>
         </div>
+
+        <a href="#home" class="footer-iconTop" title="Back to Top">
+            <i class='bx bx-up-arrow-alt'></i>
+        </a>
     </footer>
 
 
