@@ -237,6 +237,46 @@
 
     <!-- custom js -->
     <script src="js/script.js"></script>
+    
+    <!-- Additional script for Medium Publications page -->
+    <script>
+        // Ensure dark mode functionality works on this page
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkModeIcon = document.querySelector('#darkMode-icon');
+            
+            // Check if dark mode was previously enabled
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                darkModeIcon.classList.add('bx-sun');
+            }
+            
+            // Dark mode toggle functionality
+            if (darkModeIcon) {
+                darkModeIcon.addEventListener('click', function() {
+                    darkModeIcon.classList.toggle('bx-sun');
+                    document.body.classList.toggle('dark-mode');
+                    
+                    // Save dark mode preference
+                    if (document.body.classList.contains('dark-mode')) {
+                        localStorage.setItem('darkMode', 'enabled');
+                    } else {
+                        localStorage.setItem('darkMode', 'disabled');
+                    }
+                });
+            }
+            
+            // Menu toggle functionality for mobile
+            const menuIcon = document.querySelector('#menu-icon');
+            const navbar = document.querySelector('.navbar');
+            
+            if (menuIcon && navbar) {
+                menuIcon.addEventListener('click', function() {
+                    menuIcon.classList.toggle('bx-x');
+                    navbar.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -61,10 +61,27 @@ var swiper = new Swiper(".mySwiper", {
 /*========== dark light mode ==========*/
 let darkModeIcon = document.querySelector('#darkMode-icon');
 
-darkModeIcon.onclick = () => {
-    darkModeIcon.classList.toggle('bx-sun');
-    document.body.classList.toggle('dark-mode');
-};
+// Check if dark mode was previously enabled
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.body.classList.add('dark-mode');
+    if (darkModeIcon) {
+        darkModeIcon.classList.add('bx-sun');
+    }
+}
+
+if (darkModeIcon) {
+    darkModeIcon.onclick = () => {
+        darkModeIcon.classList.toggle('bx-sun');
+        document.body.classList.toggle('dark-mode');
+        
+        // Save dark mode preference
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    };
+}
 
 
 /*========== scroll reveal ==========*/
