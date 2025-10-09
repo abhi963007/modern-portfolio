@@ -268,3 +268,49 @@ footerLinks.forEach(link => {
         }
     });
 });
+
+/*========== Read More functionality for services ==========*/
+document.addEventListener('DOMContentLoaded', function() {
+    const readMoreBtns = document.querySelectorAll('.read-more-btn');
+    
+    readMoreBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const serviceBox = this.closest('.services-box');
+            const serviceDetails = serviceBox.querySelector('.service-details');
+            const servicePreview = serviceBox.querySelector('.service-preview');
+            
+            if (serviceDetails.style.display === 'none' || serviceDetails.style.display === '') {
+                // Show details
+                serviceDetails.style.display = 'block';
+                servicePreview.style.display = 'none';
+                this.textContent = 'Read Less';
+                this.classList.add('expanded');
+                
+                // Smooth scroll animation
+                serviceDetails.style.opacity = '0';
+                serviceDetails.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    serviceDetails.style.transition = 'all 0.3s ease';
+                    serviceDetails.style.opacity = '1';
+                    serviceDetails.style.transform = 'translateY(0)';
+                }, 10);
+                
+            } else {
+                // Hide details
+                serviceDetails.style.transition = 'all 0.3s ease';
+                serviceDetails.style.opacity = '0';
+                serviceDetails.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    serviceDetails.style.display = 'none';
+                    servicePreview.style.display = 'block';
+                    this.textContent = 'Read More';
+                    this.classList.remove('expanded');
+                }, 300);
+            }
+        });
+    });
+});

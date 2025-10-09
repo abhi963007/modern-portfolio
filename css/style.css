@@ -527,6 +527,37 @@ span {
     margin: 1rem 0 3rem;
 }
 
+.service-details {
+    font-size: 1.6rem;
+    margin: 1rem 0 3rem;
+    transition: all 0.3s ease;
+}
+
+.service-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.service-details li {
+    margin: 1rem 0;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(117, 78, 249, 0.1);
+}
+
+.service-details li:last-child {
+    border-bottom: none;
+}
+
+.service-details strong {
+    color: var(--main-color);
+}
+
+.read-more-btn.expanded {
+    background: var(--main-color);
+    color: var(--white-color);
+}
+
 .portfolio {
     min-height: auto;
     padding-bottom: 10rem;
