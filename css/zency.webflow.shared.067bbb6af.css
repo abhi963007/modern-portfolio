@@ -2378,6 +2378,8 @@ blockquote {
   text-transform: uppercase;
   padding-top: 13px;
   padding-bottom: 13px;
+  padding-left: 45px;
+  padding-right: 45px;
   font-family:
     Open Sans,
     sans-serif;
@@ -2394,10 +2396,12 @@ blockquote {
 }
 
 .button-main.button-bg-white {
+  border-color: var(--white);
   background-color: var(--white);
 }
 
 .button-main.button-bg-white:hover {
+  border-color: var(--white);
   color: var(--white);
   background-color: #0000;
 }
