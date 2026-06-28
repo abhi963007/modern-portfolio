@@ -92,6 +92,38 @@
       padding: 4px 0px;
       color: #15151f;
     }
+
+    /* Mobile View Optimizations */
+    @media (max-width: 767px) {
+      /* Video Sound Toggle Button Mobile position & size */
+      #video-sound-toggle {
+        bottom: 20px !important;
+        right: 15px !important;
+        width: 38px !important;
+        height: 38px !important;
+      }
+      #video-sound-toggle svg {
+        width: 16px !important;
+        height: 16px !important;
+      }
+    }
+
+    @media (max-width: 479px) {
+      /* Splash Screen Responsive Typography */
+      #splash-content h1 {
+        font-size: 2.2rem !important;
+        letter-spacing: 2px !important;
+      }
+      #splash-content p {
+        font-size: 0.75rem !important;
+        letter-spacing: 2px !important;
+      }
+      /* Hero Heading mobile size to prevent overflow */
+      .creative-four-hero-sub-text-block h1 {
+        font-size: 2.6rem !important;
+        line-height: 1.15 !important;
+      }
+    }
   </style>
 </head>
 
@@ -350,10 +382,10 @@
       <div class="creative-four-about-main">
         <div class="creative-four-about-image-block" style="position: relative; overflow: hidden; line-height: 0;">
           <video id="about-video" src="videos/VID-20250630-WA0014.mp4" autoplay loop muted playsinline
-            style="width: 100%; height: 100%; object-fit: cover;"></video>
+            style="width: 100%; height: auto; aspect-ratio: 499/629; object-fit: cover;"></video>
           <button id="video-sound-toggle" type="button" style="
                 position: absolute;
-                bottom: 100px;
+                bottom: 90px;
                 right: 20px;
                 background: rgba(21, 21, 31, 0.85);
                 border: 1px solid rgba(255, 255, 255, 0.25);
