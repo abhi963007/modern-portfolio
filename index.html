@@ -809,6 +809,43 @@
       const splash = document.getElementById("splash-screen");
       const splashContent = document.getElementById("splash-content");
       const splashLoader = document.getElementById("splash-loader");
+      const counters = document.querySelectorAll(".counter-value");
+
+      // Stats Count Up Animation Function
+      const countUp = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        const duration = 2000; // 2 seconds animation
+        const startTime = performance.now();
+        
+        const update = (now) => {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing: easeOutQuad
+          const ease = progress * (2 - progress);
+          const currentValue = Math.floor(ease * target);
+          
+          counter.innerText = currentValue + "+";
+          
+          if (progress < 1) {
+            requestAnimationFrame(update);
+          } else {
+            counter.innerText = target + "+";
+          }
+        };
+        
+        requestAnimationFrame(update);
+      };
+
+      // Intersection Observer for Stats
+      const statsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            countUp(entry.target);
+            observer.unobserve(entry.target); // Trigger only once
+          }
+        });
+      }, { threshold: 0.1 });
 
       if (splash && splashContent) {
         // Lock body scroll during splash screen
@@ -833,43 +870,14 @@
           splash.style.visibility = "hidden";
           // Restore body scroll after splash fades out
           document.body.style.overflow = "";
+          
+          // Start observing stats counters after splash screen is completely hidden
+          counters.forEach(counter => statsObserver.observe(counter));
         }, 2000);
+      } else {
+        // Fallback if no splash screen is present
+        counters.forEach(counter => statsObserver.observe(counter));
       }
-
-      // Stats Count Up Animation
-      const counters = document.querySelectorAll(".counter-value");
-      
-      const countUp = (counter) => {
-        const target = +counter.getAttribute("data-target");
-        let count = 0;
-        const duration = 1500; // Animation duration in milliseconds
-        const frameRate = 30; // 30ms per frame
-        const totalFrames = duration / frameRate;
-        const increment = target / totalFrames;
-        
-        const updateCount = () => {
-          count += increment;
-          if (count < target) {
-            counter.innerText = Math.ceil(count) + "+";
-            setTimeout(updateCount, frameRate);
-          } else {
-            counter.innerText = target + "+";
-          }
-        };
-        
-        updateCount();
-      };
-
-      const statsObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            countUp(entry.target);
-            observer.unobserve(entry.target); // Trigger only once
-          }
-        });
-      }, { threshold: 0.2 });
-
-      counters.forEach(counter => statsObserver.observe(counter));
     });
   </script>
 </body>
