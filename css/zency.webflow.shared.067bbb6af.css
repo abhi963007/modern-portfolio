@@ -4993,6 +4993,7 @@ blockquote {
 
 .creative-four-feature-grid-block {
   position: relative;
+  overflow: hidden;
 }
 
 .creative-four-feature-grid-block.margin-bottom-fifty {
@@ -5001,6 +5002,14 @@ blockquote {
 
 .creative-four-feature-grid-block.margin-top-fifty {
   margin-top: 50px;
+}
+
+.creative-four-feature-grid-block img {
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.creative-four-feature-grid-block:hover img {
+  transform: scale(1.08);
 }
 
 .creative-four-feature-grid-main {
@@ -5012,6 +5021,12 @@ blockquote {
   display: flex;
   position: absolute;
   inset: 0%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0) 100%);
+  transition: background 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.creative-four-feature-grid-block:hover .creative-four-feature-grid-main {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.45) 50%, rgba(0, 0, 0, 0.1) 100%);
 }
 
 .creative-four-divider {
