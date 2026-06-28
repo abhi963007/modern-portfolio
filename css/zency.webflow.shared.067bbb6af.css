@@ -2971,12 +2971,13 @@ blockquote {
 }
 
 .footer {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .footer-container {
-  max-width: 1290px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .footer-main {
@@ -5261,12 +5262,13 @@ blockquote {
 
 .creative-four-cta {
   padding-bottom: 120px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .creative-four-cta-container {
-  max-width: 1290px;
+  max-width: 100%;
+  width: 100%;
 }
 
 .nav-mail-link {
