@@ -491,13 +491,13 @@
             <div class="creative-four-agency-counter-block">
               <div class="w-layout-grid creative-four-agency-counter-grid">
                 <div id="w-node-_278a2fe4-7280-5ff1-25bd-e55c0fc8360a-0006bd36">
-                  <div class="counter-two-font padding-bottom-ten">1+</div>
+                  <div class="counter-two-font padding-bottom-ten counter-value" data-target="1">0+</div>
                   <div class="heading-small change-black letter-space-off">
                     Years Experience
                   </div>
                 </div>
                 <div id="w-node-c46fe699-88df-ccfb-2ea7-121cd20fc6d8-0006bd36">
-                  <div class="counter-two-font padding-bottom-ten">50+</div>
+                  <div class="counter-two-font padding-bottom-ten counter-value" data-target="50">0+</div>
                   <div class="heading-small change-black letter-space-off">
                     Articles Published
                   </div>
@@ -833,6 +833,41 @@
           document.body.style.overflow = "";
         }, 2000);
       }
+
+      // Stats Count Up Animation
+      const counters = document.querySelectorAll(".counter-value");
+      
+      const countUp = (counter) => {
+        const target = +counter.getAttribute("data-target");
+        let count = 0;
+        const duration = 1500; // Animation duration in milliseconds
+        const frameRate = 30; // 30ms per frame
+        const totalFrames = duration / frameRate;
+        const increment = target / totalFrames;
+        
+        const updateCount = () => {
+          count += increment;
+          if (count < target) {
+            counter.innerText = Math.ceil(count) + "+";
+            setTimeout(updateCount, frameRate);
+          } else {
+            counter.innerText = target + "+";
+          }
+        };
+        
+        updateCount();
+      };
+
+      const statsObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            countUp(entry.target);
+            observer.unobserve(entry.target); // Trigger only once
+          }
+        });
+      }, { threshold: 0.2 });
+
+      counters.forEach(counter => statsObserver.observe(counter));
     });
   </script>
 </body>
